@@ -1,32 +1,37 @@
-from datetime import date
+from database import init_db
+from register import register
+from login import login
+from attendance import mark_attendance
 
-class AttendanceSystem:
-    def __init__(self):
-        self.students = {}
-        self.attendance = {}
+def main():
+    init_db()
 
-    def add_student(self, student_id, name, department):
-        self.students[student_id] = {
-            "name": name,
-            "department": department
-        }
+    print("=== Attendance Management System ===")
+    while True:
+        print("\n1. Register\n2. Login\n3. Mark Attendance\n4. Exit")
+        choice = input("Enter choice: ")
 
-    def list_students(self):
-        return self.students
+        if choice == "1":
+            username = input("Enter username: ")
+            password = input("Enter password: ")
+            register(username, password)
 
-    def mark_attendance(self, student_id, status):
-        today = str(date.today())
-        if student_id not in self.attendance:
-            self.attendance[student_id] = {}
-        self.attendance[student_id][today] = status
+        elif choice == "2":
+            username = input("Enter username: ")
+            password = input("Enter password: ")
+            login(username, password)
 
+        elif choice == "3":
+            username = input("Enter username: ")
+            status = input("Enter status (Present/Absent): ")
+            mark_attendance(username, status)
 
-# ---- USING THE SYSTEM ----
-system = AttendanceSystem()
+        elif choice == "4":
+            print("👋 Exiting system...")
+            break
 
-system.add_student("101", "Rahul", "CSE")
-print("Students:", system.list_students())
+        else:
+            print("⚠️ Invalid choice!")
 
-system.mark_attendance("101", "Present")
-print("Attendance:", system.attendance)
-
+if __name__ == "__main__":
+    main()
