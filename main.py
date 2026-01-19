@@ -27,11 +27,11 @@ def main():
             mark_attendance(username, status)
 
         elif choice == "4":
-            print("👋 Exiting system...")
+            print(" Exiting system...")
             break
 
         else:
-            print("⚠️ Invalid choice!")
+            print(" Invalid choice!")
 
 if __name__ == "__main__":
     main()
